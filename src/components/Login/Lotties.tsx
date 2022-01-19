@@ -1,6 +1,6 @@
 import React from 'react'
 import LottieView from "lottie-react-native";
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 
 export const Lotties = () => {
     return (
@@ -10,11 +10,3 @@ export const Lotties = () => {
     )
 }
 
-const stylesLottis = StyleSheet.create({
-    main:{       
-        justifyContent:'center',
-        alignItems:'center',
-        marginTop:15,
-       
-    }
-})
