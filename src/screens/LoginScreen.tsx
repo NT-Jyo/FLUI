@@ -26,10 +26,11 @@ export const LoginScreen = ({navigation}:Props) => {
                     <LottieView  style={{width:240, height:240}} source={require('../assets/login.json')} autoPlay loop />
                 </View>    
             
-            <Text style={{alignItems:'center', alignContent:'center'}}>Bienvenido</Text>
+            <Text style={{alignItems:'center', alignContent:'center', fontWeight:'bold',fontSize:25, color:'#050f24'}}>Bienvenido</Text>            
             <Button
                 title="Google Sign-In"
                 onPress={login}
+                
                 />
             <View>
                 <Text></Text>
@@ -49,10 +50,12 @@ const styles = StyleSheet.create({
     },
     content:{
         margin:40,
-        alignItems:'center'
+        alignItems:'center',
+        alignContent:'center',
+        alignSelf:'center',
     },
     lottie:{
-        marginTop:30,
+        marginTop:150,
     }
 
 

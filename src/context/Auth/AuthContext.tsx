@@ -1,18 +1,20 @@
 import React, { createContext, useEffect, useState } from "react";
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import auth from '@react-native-firebase/auth';
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { Platform } from "react-native";
+import { GoogleSignIn } from "../../interfaces/Auth/AuthInterface";
 
 
 type AuthContextProps={
     isLoading:boolean;
     signInGoogle:()=>Promise<void>    
+    user:FirebaseAuthTypes.UserCredential| undefined
 }
 
 export const AuthContext = createContext({} as AuthContextProps)
 export const AuthProvider =({children}:any)=>{
     const [isLoading, setisLoading] = useState(false)
-
+    const [user, setuser] = useState<FirebaseAuthTypes.UserCredential>();
 
     useEffect(() => {
         
@@ -30,10 +32,7 @@ export const AuthProvider =({children}:any)=>{
         } 
     }, [])
 
-
-
-
-  
+ 
 
 
     const signInGoogle=async()=>{
@@ -42,8 +41,8 @@ export const AuthProvider =({children}:any)=>{
         // Create a Google credential with the token
         const googleCredential = auth.GoogleAuthProvider.credential(idToken);      
         // Sign-in the user with the credential
-        auth().signInWithCredential(googleCredential).then((dataUser)=>{
-           console.log(' dataUser.user.email', dataUser.user.email)
+        auth().signInWithCredential(googleCredential).then((dataUser)=>{          
+           setuser(dataUser)
            setisLoading(false);
         })
      
@@ -54,7 +53,8 @@ export const AuthProvider =({children}:any)=>{
     return (
         <AuthContext.Provider value={{
             signInGoogle,
-            isLoading
+            isLoading,
+            user,
             }}>
             {children}
         </AuthContext.Provider>

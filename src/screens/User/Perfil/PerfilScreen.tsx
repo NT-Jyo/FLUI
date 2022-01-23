@@ -1,10 +1,35 @@
-import React from 'react'
-import { Text } from 'react-native';
+import React, { useContext, useEffect } from 'react'
+import { Text, View, StyleSheet, Image, FlatList } from 'react-native';
+import { CardCourse } from '../../../components/User/CardCourse';
+import { AuthContext } from '../../../context/Auth/AuthContext';
+import { StudentContext } from '../../../context/Student/StudentContext';
+import { stylesGlobal } from '../../../theme/appTheme';
 
 export const PerfilScreen = () => {
+
+    const {user} = useContext(AuthContext);
+    const {getCourses,course}=useContext(StudentContext)
+
+    useEffect(() => {
+        getCourses(String(user?.user.email))
+    }, []);
+    
+
     return (
-        <>
-            <Text>Perfil Screen</Text> 
-        </>
+        <View style={stylesGlobal.globalMargin}>            
+            <Text style={{marginTop:15, textAlign:'center'}}>{user?.user.email}</Text>
+            <View style={{marginTop:15, flex:1}}>
+            <FlatList
+                data ={course}
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}                
+                renderItem={({item})=>(
+                    <CardCourse data={item}/>                    
+                )}/>
+
+            </View>
+
+
+        </View>
     )
 }

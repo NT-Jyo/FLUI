@@ -10,7 +10,7 @@ interface Props{
     
 }
 
-export const CardFaculty = ({data}:Props,  ) => {
+export const CardFaculty = ({data}:Props  ) => {
 
     const navigation = useNavigation();
   

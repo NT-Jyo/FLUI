@@ -6,16 +6,17 @@ import { stylesGlobal } from '../../../theme/appTheme';
 import { TeacherContext } from '../../../context/Teacher/TeacherContext';
 import { FlatList } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import { Teacher } from '../../../interfaces/University/Teacher';
+import { CardTeacher } from '../../../components/University/CardTeacher';
 
 interface Props extends StackScreenProps<RootStackParams, 'UTeacherScreen'> { }
 export const UTeacherScreen = ({ route}: Props) => {
 
     const data =route.params;
 
-    const {teacher} = useContext(TeacherContext);
-    console.log(data.Faculty,'facultad')
-    const filterFaculty = teacher.filter((resp)=>resp.faculty=='Facultad de Ingeniería');
-
+    const {teacher} = useContext(TeacherContext);   
+    const filterFaculty = teacher.filter((resp)=>resp!.faculty=='Facultad de Ingeniería');
+    console.log('la informacion que se esta pasando es',data)
 
   const navigation =useNavigation();
 
@@ -26,10 +27,7 @@ export const UTeacherScreen = ({ route}: Props) => {
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}                
                 renderItem={({item})=>(
-                   <View>
-                       <Text>{item?.displayName}</Text>
-                   </View>
-                    
+                    <CardTeacher data={item}/>                    
                 )}/>
 
                
