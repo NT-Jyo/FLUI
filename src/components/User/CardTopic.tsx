@@ -1,31 +1,27 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native'
+import { Topics } from '../../interfaces/University/Subjects';
 import { Course } from '../../interfaces/University/Course';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface Props {
-    data: Course,
-
+    data: Topics;     
 }
 
-export const CardCourse = ({ data }: Props) => {
+export const CardTopic = ({ data }: Props) => {
 
     const navigation = useNavigation();
 
-    const navigate =async()=>{
-        const jsonValue = JSON.stringify(data)
-        await AsyncStorage.setItem('@Course',jsonValue)
-        navigation.navigate('CourseDataScreen',data)
-    }
+   
     return (
         <View>
 
-            <TouchableOpacity onPress={()=>navigate()} activeOpacity={0.8} style={stylesCardFaculty.container} >
+            <TouchableOpacity onPress={() => navigation.navigate('IntroduccionScreen',data  )} activeOpacity={0.8} style={stylesCardFaculty.container} >
 
                 <View >
-                    <Text style={{ marginVertical: 10 }}>{data.nameSubject}</Text>
+                    <Text style={{ marginVertical: 10 }}>{data.name}</Text>
                 </View>
 
             </TouchableOpacity>

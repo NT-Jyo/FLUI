@@ -3,13 +3,17 @@ import firestore from '@react-native-firebase/firestore';
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 import { Student } from "../../interfaces/University/Student";
 import { Course } from "../../interfaces/University/Course";
+import { Phrase, Topics } from "../../interfaces/University/Subjects";
 
 type StudentContextProps = {
     isLoading: boolean;
     students:Student[],
     course:Course[],
-    getCourses:(student:string)=>Promise<void>
-   
+    topic:Topics[],
+    phrase:Phrase[],
+    getCourses:(student:string)=>Promise<void>,
+    getTopics:(teacher: string,subject:string)=>Promise<void>,
+    getPhrase:()=>Promise<void>,
 }
 
 export const StudentContext = createContext({} as StudentContextProps)
@@ -19,6 +23,8 @@ export const StudentProvider = ({ children }: any) => {
 
     const [students, setStudents] = useState([]);
     const [course, setCourse] = useState([]);
+    const [topic, setTopic] = useState([]);
+    const [phrase,setPharase]= useState([])
 
 
     const getUnibague= async () => {
@@ -53,6 +59,40 @@ export const StudentProvider = ({ children }: any) => {
     }
 
 
+    const getTopics = async (teacher: string,subject:string) => {
+
+        await firestore().collection('Aula').doc(teacher).collection('Subjects').doc(subject).collection('topics').orderBy('date').get()
+            .then(querySnapshot => {
+                const list: any = [];
+                querySnapshot.forEach(documentSnapshot => {
+       
+                    const { date,name} = documentSnapshot.data();
+                    const idTopic= documentSnapshot.id;                                    
+                    list.push({
+                        id: documentSnapshot.id,
+                        date,name, idTopic
+                    }) 
+                });
+                setTopic(list)
+            });
+    }
+
+
+    const getPhrase = async ()=>{
+        await firestore().collection('fraseDelDia').get()
+            .then(querySnapshot => {
+                const list: any = [];
+                querySnapshot.forEach(documentSnapshot => {
+                    const { sentence,uid} = documentSnapshot.data();
+                    list.push({
+                        id: documentSnapshot.id,
+                        sentence,uid
+                    })
+                });
+                setPharase(list)
+            });
+    }
+
 
 
     useEffect(() => {
@@ -67,8 +107,12 @@ export const StudentProvider = ({ children }: any) => {
         <StudentContext.Provider value={{
             isLoading,
             students,
-            getCourses,
+            topic,
             course,
+            phrase,
+            getCourses,            
+            getTopics,
+            getPhrase,
         }}>
             {children}
         </StudentContext.Provider>

@@ -6,13 +6,16 @@ import { AuthProvider } from './src/context/Auth/AuthContext';
 import { StatusBar } from 'react-native';
 import { TeacherProvider } from './src/context/Teacher/TeacherContext';
 import { StudentProvider } from './src/context/Student/StudentContext';
+import { TopicsProvider } from './src/context/Student/TopicsContext';
 
 const AppState= ({children}:any)=>{
   return(
     <AuthProvider>
       <StudentProvider>
         <TeacherProvider>
-          {children}
+          <TopicsProvider>
+           {children}
+          </TopicsProvider>      
         </TeacherProvider>
       </StudentProvider>
     </AuthProvider>
