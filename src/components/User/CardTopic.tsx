@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { StyleSheet, View, Text} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native'
 import { Topics } from '../../interfaces/University/Subjects';
 import { Course } from '../../interfaces/University/Course';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { TopicsContext } from '../../context/Student/TopicsContext';
 
 interface Props {
     data: Topics;     
@@ -14,11 +15,27 @@ export const CardTopic = ({ data }: Props) => {
 
     const navigation = useNavigation();
 
-   
+    const { getIntro, intro, isLoading } = useContext(TopicsContext); 
+
+    const introduction = async()=>{
+        await AsyncStorage.getItem('@Course').then(resp => {
+            if (resp !== null) {
+                const dataCourse: Course = JSON.parse(resp)
+                getIntro(dataCourse.idTeacher,dataCourse.idSubject,data.idTopic ).then(resp=>{
+                    AsyncStorage.setItem('@Topic', JSON.stringify(data))
+                    navigation.navigate('IntroduccionScreen',data  )
+                })
+            }
+        })
+
+    }
+
+
+
     return (
         <View>
 
-            <TouchableOpacity onPress={() => navigation.navigate('IntroduccionScreen',data  )} activeOpacity={0.8} style={stylesCardFaculty.container} >
+            <TouchableOpacity onPress={introduction} activeOpacity={0.8} style={stylesCardFaculty.container} >
 
                 <View >
                     <Text style={{ marginVertical: 10 }}>{data.name}</Text>
