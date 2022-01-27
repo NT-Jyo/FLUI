@@ -19,12 +19,13 @@ export const CardIntro = ({ data }: Props) => {
 
   const { width } = useWindowDimensions();
   const { getSectionOne} = useContext(TopicsContext);
+  const navigation = useNavigation();
 
   const sour = {
     html: data.description
   }
 
-  const navigation = useNavigation();
+
 
   const sectionOne = async()=>{
     await AsyncStorage.getItem('@Topic').then(topics => {
@@ -50,13 +51,14 @@ export const CardIntro = ({ data }: Props) => {
     <View style={stylesCardIntro.container}>
 
       <Image
-        style={{ width: '100%', borderTopLeftRadius: 10, borderTopRightRadius: 10, height:'40%' }}
+        style={{ width: '100%', borderTopLeftRadius: 10, borderTopRightRadius: 10, height:'30%' }}
         source={{
           uri: data.picture,
         }}
       />
-      <Text style={{ marginHorizontal: 15,}}><RenderHtml source={sour} contentWidth={width} /></Text>
-      
+      <View style={{marginTop:10}}>
+        <Text style={{ marginHorizontal: 15}}><RenderHtml source={sour} contentWidth={width} /></Text>
+      </View>  
       <View style={{alignItems:'flex-end', marginHorizontal:15}}>
         <TouchableOpacity style={stylesCardIntro.Button} onPress={sectionOne}>
           <Text style={stylesCardIntro.buttonText}>Continuar</Text>

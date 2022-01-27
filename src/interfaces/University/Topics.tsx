@@ -11,3 +11,21 @@ export interface SectionOne{
     title:          string,
     video:          string,
 }
+
+export interface SectionTwo{
+    content:        boolean,
+    description:    string,
+    link:           string,
+    picture:        string,
+    title:          string,
+    video:          string,
+}
+
+export interface SectionThree{
+    content:        boolean,
+    description:    string,
+    link:           string,
+    picture:        string,
+    title:          string,
+    video:          string,
+}

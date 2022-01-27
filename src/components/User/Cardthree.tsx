@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Image, useWindowDimensions, Linking, Alert } from 'react-native';
-import {  SectionOne, SectionTwo } from '../../interfaces/University/Topics';
+import { SectionOne, SectionTwo, SectionThree } from '../../interfaces/University/Topics';
 import RenderHtml from 'react-native-render-html';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
@@ -11,12 +11,12 @@ import { Course } from '../../interfaces/University/Course';
 
 
 interface Props {
-  data: SectionTwo;
+  data: SectionThree;
 }
 
 
 
-export const CardOne = ({ data }: Props) => {
+export const Cardthree = ({ data }: Props) => {
   const { width } = useWindowDimensions();
   const { getSectionTwo} = useContext(TopicsContext);
   const navigation = useNavigation();
@@ -44,7 +44,7 @@ export const CardOne = ({ data }: Props) => {
           if (resp !== null) {
             const dataCourse: Course= JSON.parse(resp)
             getSectionTwo(dataCourse.idTeacher, dataCourse.idSubject, Topic.idTopic).then(resp=>{
-              navigation.navigate('SectionTwoScreen')
+              //navigation.navigate('SectionTwoScreen')
               console.log('SE COMPLETO LA INFORMACION',resp,dataCourse.idTeacher, dataCourse.idSubject, Topic.idTopic)
             })
           }
@@ -66,7 +66,6 @@ export const CardOne = ({ data }: Props) => {
       <View style={{marginTop:10}}>
         <Text style={{ marginHorizontal: 15}}><RenderHtml source={sour} contentWidth={width} /></Text>
       </View>
-      
       <View style={{alignItems:'flex-start', marginHorizontal:15,marginTop:15}}>
         <TouchableOpacity  onPress={()=>link(data.link)}>
           <Text style={stylesCardIntro.buttonTextLink}>Mas informacion</Text>
@@ -82,7 +81,7 @@ export const CardOne = ({ data }: Props) => {
 
 
       <View style={{alignItems:'flex-end', marginHorizontal:15, marginTop:15}}>
-        <TouchableOpacity style={stylesCardIntro.Button} onPress={sectionTwo}>
+        <TouchableOpacity style={stylesCardIntro.Button}>
           <Text style={stylesCardIntro.buttonText}>Continuar</Text>
         </TouchableOpacity>
       </View>
