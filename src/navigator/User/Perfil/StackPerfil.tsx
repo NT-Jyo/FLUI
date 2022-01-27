@@ -8,6 +8,8 @@ import { Topics } from '../../../interfaces/University/Subjects';
 import { SectionOneScreen } from '../../../screens/User/Perfil/SectionOneScreen';
 import { SectionTwoScreen } from '../../../screens/User/Perfil/SectionTwoScreen';
 import { SectionThreeSceen } from '../../../screens/User/Perfil/SectionThreeSceen';
+import { SectionFourScreen } from '../../../screens/User/Perfil/SectionFourScreen';
+import { SectionFiveScreen } from '../../../screens/User/Perfil/SectionFiveScreen';
 
 
 
@@ -18,6 +20,8 @@ export type RootStackParamsPerfil = {
     SectionOneScreen:undefined, 
     SectionTwoScreen:undefined, 
     SectionThreeSceen:undefined,
+    SectionFourScreen:undefined,
+    SectionFiveScreen:undefined,
 }
 
 const Stack = createStackNavigator<RootStackParamsPerfil>();;
@@ -33,6 +37,8 @@ export const StackPerfil = () => {
               <Stack.Screen name="SectionOneScreen" component={SectionOneScreen} />
               <Stack.Screen name="SectionTwoScreen" component={SectionTwoScreen} />
               <Stack.Screen name="SectionThreeSceen" component={SectionThreeSceen} />
+              <Stack.Screen name="SectionFourScreen" component={SectionFourScreen} />
+              <Stack.Screen name="SectionFiveScreen" component={SectionFiveScreen} />
         </Stack.Navigator>
     )
 }

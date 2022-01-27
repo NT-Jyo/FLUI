@@ -24,7 +24,7 @@ export const StackEducation = () => {
         <Stack.Navigator screenOptions={{
             headerShown: false,
             cardStyle: {
-                backgroundColor: '#96999c'
+                
 
             }
         }}>

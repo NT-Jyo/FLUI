@@ -18,7 +18,7 @@ interface Props {
 
 export const Cardthree = ({ data }: Props) => {
   const { width } = useWindowDimensions();
-  const { getSectionTwo} = useContext(TopicsContext);
+  const { getSectionFour} = useContext(TopicsContext);
   const navigation = useNavigation();
   const sour = {
     html: data.description
@@ -36,16 +36,15 @@ export const Cardthree = ({ data }: Props) => {
   }
 
 
-  const sectionTwo=async()=>{
+  const sectionFour=async()=>{
     await AsyncStorage.getItem('@Topic').then(topics => {
       if (topics !== null) {
         const Topic: Topics = JSON.parse(topics)
         AsyncStorage.getItem('@Course').then(resp => {
           if (resp !== null) {
             const dataCourse: Course= JSON.parse(resp)
-            getSectionTwo(dataCourse.idTeacher, dataCourse.idSubject, Topic.idTopic).then(resp=>{
-              //navigation.navigate('SectionTwoScreen')
-              console.log('SE COMPLETO LA INFORMACION',resp,dataCourse.idTeacher, dataCourse.idSubject, Topic.idTopic)
+            getSectionFour(dataCourse.idTeacher, dataCourse.idSubject, Topic.idTopic).then(resp=>{
+              navigation.navigate('SectionFourScreen')             
             })
           }
         })
@@ -81,7 +80,7 @@ export const Cardthree = ({ data }: Props) => {
 
 
       <View style={{alignItems:'flex-end', marginHorizontal:15, marginTop:15}}>
-        <TouchableOpacity style={stylesCardIntro.Button}>
+        <TouchableOpacity style={stylesCardIntro.Button} onPress={sectionFour}>
           <Text style={stylesCardIntro.buttonText}>Continuar</Text>
         </TouchableOpacity>
       </View>
