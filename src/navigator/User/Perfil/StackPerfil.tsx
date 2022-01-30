@@ -10,6 +10,7 @@ import { SectionTwoScreen } from '../../../screens/User/Perfil/SectionTwoScreen'
 import { SectionThreeSceen } from '../../../screens/User/Perfil/SectionThreeSceen';
 import { SectionFourScreen } from '../../../screens/User/Perfil/SectionFourScreen';
 import { SectionFiveScreen } from '../../../screens/User/Perfil/SectionFiveScreen';
+import { SectionSixScreen } from '../../../screens/User/Perfil/SectionSixScreen';
 
 
 
@@ -22,6 +23,7 @@ export type RootStackParamsPerfil = {
     SectionThreeSceen:undefined,
     SectionFourScreen:undefined,
     SectionFiveScreen:undefined,
+    SectionSixScreen:undefined,
 }
 
 const Stack = createStackNavigator<RootStackParamsPerfil>();;
@@ -39,6 +41,7 @@ export const StackPerfil = () => {
               <Stack.Screen name="SectionThreeSceen" component={SectionThreeSceen} />
               <Stack.Screen name="SectionFourScreen" component={SectionFourScreen} />
               <Stack.Screen name="SectionFiveScreen" component={SectionFiveScreen} />
+              <Stack.Screen name="SectionSixScreen" component={SectionSixScreen} />
         </Stack.Navigator>
     )
 }

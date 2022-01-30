@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
-import { Modal, View, ActivityIndicator, Text, StyleSheet } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { Modal, View, ActivityIndicator, Text, StyleSheet, Alert } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 
 import { SectionFive } from '../../interfaces/University/Topics';
+import { AuthContext } from '../../context/Auth/AuthContext';
+import { TopicsContext } from '../../context/Student/TopicsContext';
+import { useForm } from '../../hooks/useForm';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Topics } from '../../interfaces/University/Subjects';
+import { Course } from '../../interfaces/University/Course';
 
 interface Props {
     visible: boolean,
@@ -13,10 +19,42 @@ interface Props {
 
 export const ModalQuestion = ({visible,dataModal,setModal}:Props) => {
 
+    const {user} = useContext(AuthContext);
+    const {uploadQuestion} =useContext(TopicsContext)
+
    
+
+
     const answer = async()=>{
-        setModal(false)
+        
     }
+
+
+    const { answerQuestion, onChange } = useForm({
+        answerQuestion: '',
+       
+    })
+
+
+    const validateQuestion =async()=>{
+        if(answerQuestion.length<2){
+            Alert.alert('Información', 'La respuesta es muy corta')
+        }else{
+            await AsyncStorage.getItem('@Topic').then(topics => {
+                if (topics !== null) {
+                  const Topic: Topics = JSON.parse(topics)
+                  AsyncStorage.getItem('@Course').then(resp => {
+                    if (resp !== null) {
+                      const dataCourse: Course = JSON.parse(resp)
+                        uploadQuestion(dataCourse.idTeacher,dataCourse.idSubject,dataModal.question,answerQuestion,String(user?.user.email),String(user?.user.displayName))
+                        setModal(false)
+                    }
+                  })
+                }
+              })
+        }
+    }
+
 
 
     return (
@@ -55,12 +93,14 @@ export const ModalQuestion = ({visible,dataModal,setModal}:Props) => {
                             underlineColorAndroid='white'
                             multiline
                             maxLength={95}
+                            value={answerQuestion}
+                            onChangeText={(value) => onChange(value, 'answerQuestion')}
                         />
                     </View>
 
 
                     <View style={{marginVertical:35, alignItems:'center'}}>
-                    <TouchableOpacity style={stylesModal.Button} onPress={answer}>
+                    <TouchableOpacity style={stylesModal.Button} onPress={validateQuestion}>
                     <Text style={stylesModal.buttonText}>Continuar</Text>
                     </TouchableOpacity>
                     </View>

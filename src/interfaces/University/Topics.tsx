@@ -43,3 +43,23 @@ export interface SectionFour{
 export interface SectionFive{
     question:       string,
 }
+
+export interface SolveQuestion{
+    qualification:  number,
+    question:       string,
+    solveQuestion:  string,
+    email:          string,
+    date:           number,
+    name:           string,
+}
+
+export interface Subject{
+    comments:       number,
+    likes:          number,
+    nameSubject:    string,
+    notlikes:       number,
+    photoURL:       string,
+    students:       number,
+    themes:         number,
+
+}
