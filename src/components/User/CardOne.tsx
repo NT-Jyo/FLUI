@@ -68,13 +68,13 @@ export const CardOne = ({ data }: Props) => {
       </View>
       
       <View style={{alignItems:'flex-start', marginHorizontal:15,marginTop:15}}>
-        <TouchableOpacity  onPress={()=>link(data.link)}>
+        <TouchableOpacity  onPress={()=>link(data.link)} activeOpacity={0.7}>
           <Text style={stylesCardIntro.buttonTextLink}>Mas informacion</Text>
         </TouchableOpacity>
       </View>
 
       <View style={{alignItems:'flex-start', marginHorizontal:15, marginTop:25}}>
-        <TouchableOpacity  onPress={()=>link(data.video)}>
+        <TouchableOpacity  onPress={()=>link(data.video)} activeOpacity={0.7}>
           <Text style={stylesCardIntro.buttonTextLink}>Video Complementario</Text>
         </TouchableOpacity>
       </View>

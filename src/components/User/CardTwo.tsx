@@ -67,13 +67,13 @@ export const CardTwo = ({ data }: Props) => {
         <Text style={{ marginHorizontal: 15}}><RenderHtml source={sour} contentWidth={width} /></Text>
       </View>
       <View style={{alignItems:'flex-start', marginHorizontal:15,marginTop:15}}>
-        <TouchableOpacity  onPress={()=>link(data.link)}>
+        <TouchableOpacity  onPress={()=>link(data.link)} activeOpacity={0.7}>
           <Text style={stylesCardIntro.buttonTextLink}>Mas informacion</Text>
         </TouchableOpacity>
       </View>
 
       <View style={{alignItems:'flex-start', marginHorizontal:15, marginTop:25}}>
-        <TouchableOpacity  onPress={()=>link(data.video)}>
+        <TouchableOpacity  onPress={()=>link(data.video)} activeOpacity={0.7}>
           <Text style={stylesCardIntro.buttonTextLink}>Video Complementario</Text>
         </TouchableOpacity>
       </View>
@@ -81,7 +81,7 @@ export const CardTwo = ({ data }: Props) => {
 
 
       <View style={{alignItems:'flex-end', marginHorizontal:15, marginTop:15}}>
-        <TouchableOpacity style={stylesCardIntro.Button} onPress={sectionThree}>
+        <TouchableOpacity style={stylesCardIntro.Button} onPress={sectionThree} activeOpacity={0.7}>
           <Text style={stylesCardIntro.buttonText}>Continuar</Text>
         </TouchableOpacity>
       </View>

@@ -15,8 +15,23 @@ import { Course } from '../../../interfaces/University/Course';
 interface Props extends StackScreenProps<any, any> { };
 export const SectionFiveScreen = ({ navigation }: Props) => {
 
-    const { secFive,dataSubject,secLikesSubject } = useContext(TopicsContext);    
+    const { secFive,dataSubject,secLikesSubject,getAnswer } = useContext(TopicsContext);    
     const [lottie, setlottie] = useState(false);
+
+
+    const solveQuestion =async()=>{
+
+        await AsyncStorage.getItem('@Course').then(resp => {
+            if (resp !== null) {
+              const dataCourse: Course = JSON.parse(resp)              
+              getAnswer(dataCourse.idTeacher, dataCourse.idSubject).then(resp => { navigation.navigate('SectionSixScreen')})
+            }
+        })
+        
+
+
+    }
+
     
     const exit =async()=>{
         navigation.popToTop();
@@ -31,7 +46,7 @@ export const SectionFiveScreen = ({ navigation }: Props) => {
               console.log(dataSubject?.likes)
               secLikesSubject(dataCourse.idTeacher, dataCourse.idSubject,(dataSubject?.likes+1)).then(resp => { setTimeout(() => {
                 setlottie(false)
-              }, 2000);})
+              }, 3000);})
             }
         })
     }
@@ -59,7 +74,7 @@ export const SectionFiveScreen = ({ navigation }: Props) => {
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center' }}>
                 <Fab
-                    onPress={() => console.log('Test')}
+                    onPress={() => solveQuestion()}
                     iconName='question-answer'
                     style={{ marginHorizontal: 10 }}
                 />

@@ -24,12 +24,6 @@ export const ModalQuestion = ({visible,dataModal,setModal}:Props) => {
 
    
 
-
-    const answer = async()=>{
-        
-    }
-
-
     const { answerQuestion, onChange } = useForm({
         answerQuestion: '',
        
@@ -40,18 +34,13 @@ export const ModalQuestion = ({visible,dataModal,setModal}:Props) => {
         if(answerQuestion.length<2){
             Alert.alert('Información', 'La respuesta es muy corta')
         }else{
-            await AsyncStorage.getItem('@Topic').then(topics => {
-                if (topics !== null) {
-                  const Topic: Topics = JSON.parse(topics)
-                  AsyncStorage.getItem('@Course').then(resp => {
-                    if (resp !== null) {
-                      const dataCourse: Course = JSON.parse(resp)
-                        uploadQuestion(dataCourse.idTeacher,dataCourse.idSubject,dataModal.question,answerQuestion,String(user?.user.email),String(user?.user.displayName))
-                        setModal(false)
-                    }
-                  })
+            AsyncStorage.getItem('@Course').then(resp => {
+                if (resp !== null) {
+                  const dataCourse: Course = JSON.parse(resp)
+                    uploadQuestion(dataCourse.idTeacher,dataCourse.idSubject,dataModal.question,answerQuestion,String(user?.user.email),String(user?.user.displayName))
+                    setModal(false)
                 }
-              })
+            })
         }
     }
 

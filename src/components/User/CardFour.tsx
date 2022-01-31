@@ -73,20 +73,20 @@ export const CardFour = ({ data }: Props) => {
 
       <View style={{ flexDirection: 'row', marginHorizontal: 15, marginTop: 15 }}>
         <Text style={{ fontWeight: 'bold', fontSize: 25, color: '#050f24' }}>{data.namelink1} : </Text>
-        <TouchableOpacity onPress={() => link(data.link1)}>
+        <TouchableOpacity onPress={() => link(data.link1)} activeOpacity={0.7}>
           <Text style={{ marginHorizontal: 15, fontSize: 15, marginTop: 10 }}>{data.link1}</Text>
         </TouchableOpacity>
       </View>
 
       <View style={{ flexDirection: 'row', marginHorizontal: 15, marginTop: 15 }}>
         <Text style={{ fontWeight: 'bold', fontSize: 25, color: '#050f24' }}>{data.namelink2} : </Text>
-        <TouchableOpacity onPress={() => link(data.link2)}>
+        <TouchableOpacity onPress={() => link(data.link2)} activeOpacity={0.7}>
           <Text style={{ marginHorizontal: 15, fontSize: 15, marginTop: 10 }}>{data.link2}</Text>
         </TouchableOpacity>
       </View>
 
       <View style={{ alignItems: 'flex-end', marginHorizontal: 15, marginTop: 35 }}>
-        <TouchableOpacity style={stylesCardIntro.Button} onPress={sectionFive}>
+        <TouchableOpacity style={stylesCardIntro.Button} onPress={sectionFive} activeOpacity={0.7}>
           <Text style={stylesCardIntro.buttonText}>Continuar</Text>
         </TouchableOpacity>
       </View>

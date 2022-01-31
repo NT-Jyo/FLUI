@@ -1,25 +1,49 @@
-import React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import React, { useContext } from 'react';
+import { Text, View, StyleSheet, Image, Alert } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import { Subjects } from '../../interfaces/University/Subjects';
+import { Subjects, Topics } from '../../interfaces/University/Subjects';
+import { StackScreenProps } from '@react-navigation/stack';
+import { StudentContext } from '../../context/Student/StudentContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Course } from '../../interfaces/University/Course';
+import { AuthContext } from '../../context/Auth/AuthContext';
 
 
-interface Props{
-    data:Subjects,
-    
+interface Props extends StackScreenProps<any, any> {
+    data:Subjects,   
+
 }
 
-export const CardSubjects = ({data}:Props) => {
+export const CardSubjects = ({data,navigation}:Props) => {
 
-  const navigation = useNavigation();
-    navigation.setOptions({
 
+  const {registerCourses} = useContext(StudentContext);
+  const {user} = useContext(AuthContext);
+
+  const regCourses=async()=>{
+    await AsyncStorage.getItem('@Topic').then(topics => {
+      if (topics !== null) {
+        const Topic: Topics = JSON.parse(topics)
+        AsyncStorage.getItem('@Course').then(resp => {
+          if (resp !== null) {
+            const dataCourse: Course= JSON.parse(resp)
+            console.log('data', String(user?.user.email),dataCourse.idSubject,dataCourse.idTeacher,dataCourse.nameSubject)
+            registerCourses(String(user?.user.email),dataCourse.idSubject,dataCourse.idTeacher,dataCourse.nameSubject).then(resp=>{
+              //navigation.canGoBack()
+              Alert.alert('Información','Registro exitoso, puedes observar el contenido en tu perfil')             
+                  
+            })
+          }
+        })
+      }
     })
+  }
+
 
   return (
     <View>
-        <TouchableOpacity onPress={()=>console.log('asdasda')} activeOpacity={0.8} style={stylesCardFaculty.container}>
+        <TouchableOpacity onPress={()=>regCourses()} activeOpacity={0.8} style={stylesCardFaculty.container}>
         <Image
                 style={{width:'100%',  borderTopLeftRadius:10,borderBottomLeftRadius:10,flex:0.45}}
                 source={{

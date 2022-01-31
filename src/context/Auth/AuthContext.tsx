@@ -3,6 +3,7 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { Platform } from "react-native";
 import { GoogleSignIn } from "../../interfaces/Auth/AuthInterface";
+import firestore from '@react-native-firebase/firestore';
 
 
 type AuthContextProps={
@@ -44,9 +45,27 @@ export const AuthProvider =({children}:any)=>{
         auth().signInWithCredential(googleCredential).then((dataUser)=>{          
            setuser(dataUser)
            setisLoading(false);
+           const userData ={
+                email: String(dataUser?.user.email),
+                name:dataUser?.user.displayName,
+                photo:dataUser.user.photoURL,
+                provider:dataUser?.user.providerId,
+                uid: dataUser?.user.uid,
+           }
+
+
+           if(String(dataUser?.user.email).indexOf('@estudiantesunibague.edu.co')==-1){
+
+             firestore().collection('Usuario').doc(String(dataUser?.user.email)).set(userData)
+           }else{
+             firestore().collection('Unibague').doc(String(dataUser?.user.email)).set(userData)
+           }
+
         })
      
     }
+
+    
 
 
 

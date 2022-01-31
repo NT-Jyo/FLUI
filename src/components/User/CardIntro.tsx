@@ -60,7 +60,7 @@ export const CardIntro = ({ data }: Props) => {
         <Text style={{ marginHorizontal: 15}}><RenderHtml source={sour} contentWidth={width} /></Text>
       </View>  
       <View style={{alignItems:'flex-end', marginHorizontal:15}}>
-        <TouchableOpacity style={stylesCardIntro.Button} onPress={sectionOne}>
+        <TouchableOpacity style={stylesCardIntro.Button} onPress={sectionOne} activeOpacity={0.7}>
           <Text style={stylesCardIntro.buttonText}>Continuar</Text>
         </TouchableOpacity>
       </View>

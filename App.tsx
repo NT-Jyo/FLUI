@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { NavigatorStack } from './src/navigator/Base/NavigatorStack';
 import { AuthProvider } from './src/context/Auth/AuthContext';
@@ -23,6 +23,7 @@ const AppState= ({children}:any)=>{
 }
 
 export const App = () => {
+
 
 
   return (

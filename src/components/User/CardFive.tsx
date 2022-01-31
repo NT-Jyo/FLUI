@@ -22,7 +22,7 @@ export const CardFive = ({data}:Props) => {
     return (
         <View>
 
-            <TouchableOpacity onPress={Question} activeOpacity={0.8} style={stylesCardFaculty.container} >
+            <TouchableOpacity onPress={Question} activeOpacity={0.7} style={stylesCardFaculty.container} >
 
                 <View >
                     <Text style={{ marginVertical: 10 }}>{data.question}</Text>

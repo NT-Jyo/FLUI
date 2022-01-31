@@ -14,6 +14,7 @@ type StudentContextProps = {
     getCourses:(student:string)=>Promise<void>,
     getTopics:(teacher: string,subject:string)=>Promise<void>,
     getPhrase:()=>Promise<void>,
+    registerCourses:(userEmail:string,subject:string,teacher:string,nameSub:string)=>Promise<void>,
 }
 
 export const StudentContext = createContext({} as StudentContextProps)
@@ -93,6 +94,27 @@ export const StudentProvider = ({ children }: any) => {
             });
     }
 
+    const registerCourses = async (userEmail:string,subject:string,teacher:string,nameSub:string)=>{
+
+        const dataRegister: Course = {
+
+            idSubject:     subject,
+            idTeacher:     teacher,
+            liked:         false,
+            nameSubject:    nameSub,
+
+        }
+
+        if(userEmail.indexOf('@estudiantesunibague.edu.co')==-1){
+            console.log('Entro aqui', dataRegister);
+          
+           await firestore().collection('Usuario').doc(userEmail).collection('Course').doc(subject).set(dataRegister)
+        }else{
+            await firestore().collection('Unibague').doc(userEmail).collection('Course').doc(subject).set(dataRegister)
+        }
+        
+    }
+
 
 
     useEffect(() => {
@@ -113,6 +135,7 @@ export const StudentProvider = ({ children }: any) => {
             getCourses,            
             getTopics,
             getPhrase,
+            registerCourses,
         }}>
             {children}
         </StudentContext.Provider>
