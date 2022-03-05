@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, Image, useWindowDimensions, Linking, Alert } from 'react-native';
+import { View, Text, StyleSheet, Image, useWindowDimensions, Linking, Alert, Platform } from 'react-native';
 import { SectionOne, SectionTwo, SectionThree } from '../../interfaces/University/Topics';
 import RenderHtml from 'react-native-render-html';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -62,9 +62,22 @@ export const Cardthree = ({ data }: Props) => {
           uri: data.picture,
         }}
       />
-      <View style={{marginTop:10}}>
-        <Text style={{ marginHorizontal: 15}}><RenderHtml source={sour} contentWidth={width} /></Text>
-      </View>
+      {
+        (Platform.OS==='android')
+        ?(
+
+          <View style={{marginTop:10,marginHorizontal: 15 }}>
+            <RenderHtml source={sour} contentWidth={width} />
+          </View> 
+        )
+        :(
+          
+          <View style={{marginTop:10, }}>
+          <Text style={{ marginHorizontal: 15 }}><RenderHtml source={sour} contentWidth={width} /></Text>
+          </View> 
+         
+        )
+      } 
       <View style={{alignItems:'flex-start', marginHorizontal:15,marginTop:15}}>
         <TouchableOpacity  onPress={()=>link(data.link)} activeOpacity={0.7}>
           <Text style={stylesCardIntro.buttonTextLink}>Mas informacion</Text>

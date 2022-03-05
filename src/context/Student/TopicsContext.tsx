@@ -1,6 +1,7 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 import { Intro, SectionFive, SectionFour, SectionOne, SectionThree, SectionTwo, SolveQuestion, Subject } from "../../interfaces/University/Topics";
+import { AuthContext } from "../Auth/AuthContext";
 
 type TopicsContextProps = {
     isLoading: boolean;
@@ -27,6 +28,8 @@ type TopicsContextProps = {
 
 export const TopicsContext = createContext({} as TopicsContextProps)
 export const TopicsProvider = ({ children }: any) => {
+
+    const {user} = useContext(AuthContext)
 
     const [isLoading, setisLoading] = useState(false)
     const [intro, setintro] = useState([]);

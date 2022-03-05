@@ -13,22 +13,22 @@ export const NavigatorStack = () => {
     const [initializing, setInitializing] = useState(true);
     const [user, setUser] = useState();
 
-    const onAuthStateChanged = (user: any) => {
-        setUser(user);
-        if (initializing) setInitializing(false);
-    }
-
-
-    useEffect(() => {
-        const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-
-        return () => {
-            subscriber;
+    /*     const onAuthStateChanged = (user: any) => {
+            setUser(user);
+            if (initializing) setInitializing(false);
         }
-    }, []);
-
-    if (initializing) return null;
-
+    
+    
+        useEffect(() => {
+            const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    
+            return () => {
+                subscriber;
+            }
+        }, []);
+    
+        if (initializing) return null;
+     */
     return (
         <Stack.Navigator screenOptions={{
 
@@ -42,7 +42,15 @@ export const NavigatorStack = () => {
             }
         }}>
 
-            {
+            <Stack.Screen name="LoginScreen" options={{ headerShown: false }} component={LoginScreen} />
+            <Stack.Screen name="NavigatorBottom" component={NavigatorBottom} options={{
+                title: 'Universidad de Ibagué', headerTitleStyle: {
+                    color: '#ecf0f2',
+
+                }
+            }} />
+
+            {/*             {
                 (!user)
                     ? (
                         <>
@@ -57,16 +65,10 @@ export const NavigatorStack = () => {
                     : (
                         <>
 
-                            <Stack.Screen name="LoginScreen" options={{ headerShown: false }} component={LoginScreen} />
-                            <Stack.Screen name="NavigatorBottom" component={NavigatorBottom} options={{
-                                title: 'Universidad de Ibagué', headerTitleStyle: {
-                                    color: '#ecf0f2',
 
-                                }
-                            }} />
                         </>
                     )
-            }
+            } */}
 
         </Stack.Navigator>
     )

@@ -5,9 +5,29 @@ import { NavigatorUser } from '../User/NavigatorUser';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { stylesGlobal } from '../../theme/appTheme';
 import  Icon  from 'react-native-vector-icons/MaterialIcons';
+import { Platform } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 export const NavigatorBottom = () => {
+
+
+  const heigtScreen =()=>{
+    if(Platform.OS==='android'){
+      return 70
+    }else {
+      return 90
+    }
+  }
+
+  const bottomScreen =()=>{
+    if(Platform.OS==='android'){
+      return 5
+    }else {
+      return 0
+    }
+  }
+
+
   return (
     <Tab.Navigator screenOptions={({ route }) => ({
       tabBarActiveTintColor:'#fdc82a',
@@ -19,10 +39,13 @@ export const NavigatorBottom = () => {
       },
       tabBarLabelStyle:{
         fontSize:15,
+        marginBottom:bottomScreen(),
+        
       },
+
       tabBarStyle: {
         backgroundColor: '#0f1f39',
-        height:90,
+        height:heigtScreen(),
         
       },
       

@@ -1,8 +1,9 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import firestore from '@react-native-firebase/firestore';
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 import { Teacher } from "../../interfaces/University/Teacher";
 import { Subjects } from "../../interfaces/University/Subjects";
+import { AuthContext } from "../Auth/AuthContext";
 
 type TeacherContextProps = {
     isLoading: boolean;
@@ -14,6 +15,8 @@ type TeacherContextProps = {
 export const TeacherContext = createContext({} as TeacherContextProps)
 export const TeacherProvider = ({ children }: any) => {
     const [isLoading, setisLoading] = useState(false)
+
+    const {user} = useContext(AuthContext)
 
     const [teacher, setTeachers] = useState([]);
     const [subjects, setSubjects] = useState([]);
@@ -55,10 +58,13 @@ export const TeacherProvider = ({ children }: any) => {
 
     useEffect(() => {
 
-        getUsuariosW()
+        if(user!==null||undefined) {
+            getUsuariosW()
+        }
+      
 
 
-    }, [])
+    }, [user])
 
 
     return (

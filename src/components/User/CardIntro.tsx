@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, Image, useWindowDimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, useWindowDimensions,Platform } from 'react-native';
 import { Intro } from '../../interfaces/University/Topics';
 import RenderHtml from 'react-native-render-html';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -56,9 +56,24 @@ export const CardIntro = ({ data }: Props) => {
           uri: data.picture,
         }}
       />
-      <View style={{marginTop:10}}>
-        <Text style={{ marginHorizontal: 15}}><RenderHtml source={sour} contentWidth={width} /></Text>
-      </View>  
+
+
+      {
+        (Platform.OS==='android')
+        ?(
+
+          <View style={{marginTop:10,marginHorizontal: 15 }}>
+            <RenderHtml source={sour} contentWidth={width} />
+          </View> 
+        )
+        :(
+          
+          <View style={{marginTop:10, }}>
+          <Text style={{ marginHorizontal: 15 }}><RenderHtml source={sour} contentWidth={width} /></Text>
+          </View> 
+         
+        )
+      } 
       <View style={{alignItems:'flex-end', marginHorizontal:15}}>
         <TouchableOpacity style={stylesCardIntro.Button} onPress={sectionOne} activeOpacity={0.7}>
           <Text style={stylesCardIntro.buttonText}>Continuar</Text>

@@ -1,9 +1,10 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import firestore from '@react-native-firebase/firestore';
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 import { Student } from "../../interfaces/University/Student";
 import { Course } from "../../interfaces/University/Course";
 import { Phrase, Topics } from "../../interfaces/University/Subjects";
+import { AuthContext } from "../Auth/AuthContext";
 
 type StudentContextProps = {
     isLoading: boolean;
@@ -21,6 +22,7 @@ export const StudentContext = createContext({} as StudentContextProps)
 export const StudentProvider = ({ children }: any) => {
 
     const [isLoading, setisLoading] = useState(false)
+    const {user} = useContext(AuthContext)
 
     const [students, setStudents] = useState([]);
     const [course, setCourse] = useState([]);
@@ -119,10 +121,13 @@ export const StudentProvider = ({ children }: any) => {
 
     useEffect(() => {
 
-        getUnibague()
+        if(user!== null||undefined){
+            getUnibague()
+        }
+
        
 
-    }, [])
+    }, [user])
 
 
     return (
