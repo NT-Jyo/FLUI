@@ -28,7 +28,7 @@ export const USubjectScreen = ({ route}: Props) => {
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}                
         renderItem={({item})=>(
-            <CardSubjects data={item}/>                    
+             <CardSubjects data={item} teacher={data.id}/>                    
         )}/>
 
        

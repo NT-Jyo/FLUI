@@ -12,32 +12,23 @@ import { AuthContext } from '../../context/Auth/AuthContext';
 
 interface Props extends StackScreenProps<any, any> {
     data:Subjects,   
-
+    teacher:string,
 }
 
-export const CardSubjects = ({data,navigation}:Props) => {
+export const CardSubjects = ({data,teacher}:Props) => {
 
 
   const {registerCourses} = useContext(StudentContext);
   const {user} = useContext(AuthContext);
 
   const regCourses=async()=>{
-    await AsyncStorage.getItem('@Topic').then(topics => {
-      if (topics !== null) {
-        const Topic: Topics = JSON.parse(topics)
-        AsyncStorage.getItem('@Course').then(resp => {
-          if (resp !== null) {
-            const dataCourse: Course= JSON.parse(resp)
-            console.log('data', String(user?.user.email),dataCourse.idSubject,dataCourse.idTeacher,dataCourse.nameSubject)
-            registerCourses(String(user?.user.email),dataCourse.idSubject,dataCourse.idTeacher,dataCourse.nameSubject).then(resp=>{
-              //navigation.canGoBack()
-              Alert.alert('Información','Registro exitoso, puedes observar el contenido en tu perfil')             
-                  
-            })
-          }
-        })
-      }
-    })
+
+     
+   registerCourses(String(user?.user.email),data.id,teacher,data.nameSubject).then(resp=>{
+      
+      Alert.alert('Información','Registro exitoso, puedes observar el contenido en tu perfil')             
+          
+    }) 
   }
 
 

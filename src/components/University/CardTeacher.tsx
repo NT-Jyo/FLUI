@@ -28,7 +28,7 @@ export const CardTeacher = ({data}:Props) => {
               <Text style={{alignItems:'center', textAlign:'left', fontSize:15, color:'#050f24', marginTop:10, marginHorizontal:15 }}>{data.displayName}</Text>
               <Text style={{alignItems:'center', textAlign:'left',fontSize:13, color:'#050f24', marginHorizontal:15 }}>{data.email}</Text>
               <Text style={{alignItems:'center', textAlign:'left', fontWeight:'bold',fontSize:15, color:'#050f24', marginTop:10,marginHorizontal:15 }}>Asignaturas impartidas</Text>
-              <Text style={{alignItems:'center', textAlign:'justify', fontSize:15, color:'#050f24', marginTop:10, marginHorizontal:15 }}>{data.subjects}</Text>                      
+              <Text style={{alignItems:'center', fontSize:15, color:'#050f24', marginTop:10, marginHorizontal:15 }}>{data.subjects}</Text>                      
          </View>
         </TouchableOpacity>
     </View>
@@ -40,7 +40,7 @@ const stylesCardFaculty = StyleSheet.create({
       flexDirection: 'row',
       backgroundColor: 'white',
       borderRadius: 10,
-      height: 195,
+      height: 220,
       shadowColor: "#000",
       shadowOffset: {
           width: 0,

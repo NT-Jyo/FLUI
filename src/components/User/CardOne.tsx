@@ -5,7 +5,7 @@ import RenderHtml from 'react-native-render-html';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { TopicsContext } from '../../context/Student/TopicsContext';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { Topics } from '../../interfaces/University/Subjects';
 import { Course } from '../../interfaces/University/Course';
 
@@ -65,7 +65,7 @@ export const CardOne = ({ data }: Props) => {
       />
 
 
-
+     <ScrollView>    
       {
         (Platform.OS === 'android')
           ? (
@@ -82,7 +82,7 @@ export const CardOne = ({ data }: Props) => {
 
           )
       }
-
+    </ScrollView>
 
 
       <View style={{ alignItems: 'flex-start', marginHorizontal: 15, marginTop: 15 }}>

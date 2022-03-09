@@ -5,13 +5,14 @@ import { Student } from "../../interfaces/University/Student";
 import { Course } from "../../interfaces/University/Course";
 import { Phrase, Topics } from "../../interfaces/University/Subjects";
 import { AuthContext } from "../Auth/AuthContext";
-
+import uuid from 'react-native-uuid';
 type StudentContextProps = {
     isLoading: boolean;
     students:Student[],
     course:Course[],
     topic:Topics[],
     phrase:Phrase[],
+    load:string,
     getCourses:(student:string)=>Promise<void>,
     getTopics:(teacher: string,subject:string)=>Promise<void>,
     getPhrase:()=>Promise<void>,
@@ -22,6 +23,7 @@ export const StudentContext = createContext({} as StudentContextProps)
 export const StudentProvider = ({ children }: any) => {
 
     const [isLoading, setisLoading] = useState(false)
+    const [load, setload] = useState('')
     const {user} = useContext(AuthContext)
 
     const [students, setStudents] = useState([]);
@@ -111,8 +113,12 @@ export const StudentProvider = ({ children }: any) => {
             console.log('Entro aqui', dataRegister);
           
            await firestore().collection('Usuario').doc(userEmail).collection('Course').doc(subject).set(dataRegister)
+           const uid=uuid.v4()   
+           setload(String(uid))
         }else{
             await firestore().collection('Unibague').doc(userEmail).collection('Course').doc(subject).set(dataRegister)
+            const uid=uuid.v4()   
+           setload(String(uid))
         }
         
     }
@@ -137,6 +143,7 @@ export const StudentProvider = ({ children }: any) => {
             topic,
             course,
             phrase,
+            load,
             getCourses,            
             getTopics,
             getPhrase,

@@ -8,11 +8,11 @@ import { stylesGlobal } from '../../../theme/appTheme';
 export const PerfilScreen = () => {
 
     const {user} = useContext(AuthContext);
-    const {getCourses,course}=useContext(StudentContext)
+    const {getCourses,course,load}=useContext(StudentContext)
 
     useEffect(() => {
         getCourses(String(user?.user.email))
-    }, []);
+    }, [load]);
     
 
     return (

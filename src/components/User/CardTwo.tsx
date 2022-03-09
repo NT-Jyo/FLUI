@@ -63,6 +63,9 @@ export const CardTwo = ({ data }: Props) => {
           uri: data.picture,
         }}
       />
+
+
+     <ScrollView> 
       {
         (Platform.OS==='android')
         ?(
@@ -79,7 +82,7 @@ export const CardTwo = ({ data }: Props) => {
          
         )
       } 
-
+    </ScrollView>     
 
 
       <View style={{alignItems:'flex-start', marginHorizontal:15,marginTop:15}}>
