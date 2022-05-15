@@ -10,10 +10,13 @@ type AuthContextProps={
     isLoading:boolean;
     signInGoogle:()=>Promise<void>    
     user:FirebaseAuthTypes.UserCredential| undefined
+    signIn:(email:string, password:string)=>Promise<void>;
+    register:(email:string, password:string)=>Promise<void>;
 }
 
 export const AuthContext = createContext({} as AuthContextProps)
 export const AuthProvider =({children}:any)=>{
+    
     const [isLoading, setisLoading] = useState(false)
     const [user, setuser] = useState<FirebaseAuthTypes.UserCredential>();
 
@@ -35,6 +38,38 @@ export const AuthProvider =({children}:any)=>{
 
  
 
+
+    const signIn = async(email:string,password:string)=>{
+
+        await auth().signInWithEmailAndPassword(email,password).then(resp=>{
+            console.log(resp)
+            setuser(resp)
+                       
+            
+        })
+    }
+
+    const register = async(email:string,password:string)=>{
+        await auth().createUserWithEmailAndPassword(email,password).then(dataUser=>{
+            console.log(dataUser)
+            setuser(dataUser)
+            const userData ={
+                email: String(dataUser?.user.email),
+                name:dataUser?.user.displayName,
+                photo:dataUser.user.photoURL,
+                provider:dataUser?.user.providerId,
+                uid: dataUser?.user.uid,
+           }
+
+
+           if(String(dataUser?.user.email).indexOf('@estudiantesunibague.edu.co')==-1){
+
+             firestore().collection('Usuario').doc(String(dataUser?.user.email)).set(userData)
+           }else{
+             firestore().collection('Unibague').doc(String(dataUser?.user.email)).set(userData)
+           }    
+        });
+    }
 
     const signInGoogle=async()=>{
         setisLoading(true);
@@ -74,6 +109,8 @@ export const AuthProvider =({children}:any)=>{
             signInGoogle,
             isLoading,
             user,
+            signIn,
+            register,
             }}>
             {children}
         </AuthContext.Provider>

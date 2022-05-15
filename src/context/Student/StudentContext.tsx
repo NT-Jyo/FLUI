@@ -17,6 +17,7 @@ type StudentContextProps = {
     getTopics:(teacher: string,subject:string)=>Promise<void>,
     getPhrase:()=>Promise<void>,
     registerCourses:(userEmail:string,subject:string,teacher:string,nameSub:string)=>Promise<void>,
+    contador:number,
 }
 
 export const StudentContext = createContext({} as StudentContextProps)
@@ -31,6 +32,7 @@ export const StudentProvider = ({ children }: any) => {
     const [topic, setTopic] = useState([]);
     const [phrase,setPharase]= useState([])
 
+    const [contador, setcontador] = useState(0)
 
     const getUnibague= async () => {
         await firestore().collection('Unibague').get()
@@ -49,7 +51,10 @@ export const StudentProvider = ({ children }: any) => {
 
     const getCourses = async (student: string) => {
 
-        await firestore().collection('Unibague').doc(student).collection('Course').get()
+
+        if(String(student).indexOf('@estudiantesunibague.edu.co')==-1){
+
+            await firestore().collection('Usuario').doc(student).collection('Course').get()
             .then(querySnapshot => {
                 const list: any = [];
                 querySnapshot.forEach(documentSnapshot => {
@@ -61,6 +66,25 @@ export const StudentProvider = ({ children }: any) => {
                 });
                 setCourse(list)
             });
+
+
+        }else{
+            await firestore().collection('Unibague').doc(student).collection('Course').get()
+            .then(querySnapshot => {
+                const list: any = [];
+                querySnapshot.forEach(documentSnapshot => {
+                    const { idSubject, nameSubject, liked,idTeacher} = documentSnapshot.data();                                        
+                    list.push({
+                        id: documentSnapshot.id,
+                        idSubject, nameSubject, liked,idTeacher
+                    })
+                });
+                setCourse(list)
+            });
+        }
+
+
+
     }
 
 
@@ -148,6 +172,7 @@ export const StudentProvider = ({ children }: any) => {
             getTopics,
             getPhrase,
             registerCourses,
+            contador,
         }}>
             {children}
         </StudentContext.Provider>

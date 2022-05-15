@@ -12,6 +12,8 @@ export const PerfilScreen = () => {
 
     useEffect(() => {
         getCourses(String(user?.user.email))
+
+        console.log(user?.user.email)
     }, [load]);
     
 

@@ -7,47 +7,26 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:643072121564:android:1ec777388759e4abc6f219",
+        "mobilesdk_app_id": "1:643072121564:android:ddf8590fbf89725ec6f219",
         "android_client_info": {
           "package_name": "com.flui"
         }
       },
       "oauth_client": [
         {
-          "client_id": "643072121564-sfsb3v3e1r8mm7425r6621d293cdrecu.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDtwuKmKWH-Kz2ojotItv3JUbRWTQVrZX8"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "643072121564-sfsb3v3e1r8mm7425r6621d293cdrecu.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:643072121564:android:6eee8d290612329bc6f219",
-        "android_client_info": {
-          "package_name": "com.trbj.sty"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "643072121564-3q2sbmfgqhadl05d5dn03epv9ocodr94.apps.googleusercontent.com",
+          "client_id": "643072121564-7gefbrcik23kkr0lrmrhomceaorvbn5f.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.trbj.sty",
-            "certificate_hash": "0e51965b9fcbf90d613ea3f4d6481cf82ea2a39a"
+            "package_name": "com.flui",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "643072121564-g53j633nq027hl0cmecb3q0apci9f3lj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flui",
+            "certificate_hash": "91638f3f1f898287635afbfae6f2d916bd4581fe"
           }
         },
         {
@@ -57,7 +36,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDtwuKmKWH-Kz2ojotItv3JUbRWTQVrZX8"
+          "current_key": "AIzaSyBQIfwiKzz1w9rtSdC0kgPm7rvI3SlJ4U8"
         }
       ],
       "services": {
